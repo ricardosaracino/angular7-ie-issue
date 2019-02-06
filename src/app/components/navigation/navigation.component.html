@@ -1,0 +1,82 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="'over'"
+    [opened]="false">
+
+    <mat-toolbar
+      color="primary"
+      i18n>Menu
+    </mat-toolbar>
+    <mat-nav-list>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content id="main-content">
+    <div class="content">
+
+      <app-header></app-header>
+
+      <app-banner
+        i18n-banner-title
+        banner-title="Statement of Observation Report Portal"></app-banner>
+
+      <nav
+        role="navigation"
+        class="menu">
+        <mat-toolbar color="primary">
+          <button
+            class="button-mobile"
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="(isHandset$ | async)">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            routerLink="/home">
+            <mat-icon
+              i18n-aria-label
+              aria-label="Home">home
+            </mat-icon>
+          </button>
+
+          <span class="mat-toolbar-spacer"></span>
+
+          <a
+            mat-icon-button
+            href="mailto:ESORSUPPORT.GEN-NHQ@CSC-SCC.GC.CA"
+            style="color: white"
+            i18n-matTooltip
+            matTooltip="E-SOR Application Support">
+            <mat-icon
+              i18n-aria-label
+              aria-label="E-SOR Application Support">contact_support
+            </mat-icon>
+          </a>
+
+          <button
+            mat-button [ngClass]="(isHandset$ | async) ? 'button-mobile' : 'float-right'"
+            routerLink="/login">
+            <span i18n>Login</span>
+          </button>
+
+
+        </mat-toolbar>
+      </nav>
+
+      <main class="router-content">
+        <router-outlet></router-outlet>
+      </main>
+
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
